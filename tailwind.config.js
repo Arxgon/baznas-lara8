@@ -6,6 +6,7 @@
            './resources/**/*.vue',
            'node_modules/preline/dist/*.js',
        ],
+       darkMode: "false",
        theme: {
            extend: {},
        },

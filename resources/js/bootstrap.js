@@ -26,3 +26,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+function formatRupiah(angka) {
+    let number_string = angka.value.replace(/[^,\d]/g, "").toString(),
+        split = number_string.split(","),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // Tambahkan pemisah ribuan
+    if (ribuan) {
+        let separator = sisa ? "." : "";
+        rupiah += separator + ribuan.join(".");
+    }
+
+    // Tambahkan desimal jika ada
+    rupiah = split[1] !== undefined ? rupiah + "," + split[1] : rupiah;
+    angka.value = "Rp. " + rupiah;
+}
+
+window.formatRupiah = formatRupiah;

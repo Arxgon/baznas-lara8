@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel with Tailwind CSS</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('public/js/apexcharts/dist/apexcharts.css') }}" rel="stylesheet"> --}}
 
@@ -71,7 +70,7 @@
                                         Pimpinan BAZNAS Prov. Jawa Tengah
                                     </h2>
                                     <h2 id="date-now" class="text-base font-bold text-gray-900 dark:text-neutral-200">
-                                        Selasa, 5 November 2024
+                                        Selasa, 5 November {{ date('Y') }}
                                     </h2>
                                 </div>
                                 <!-- End Title -->
@@ -107,7 +106,7 @@
                         <div class="flex justify-center items-center p-1">
                             <div>
                                 <h2 class="text-normal font-bold text-gray-900">
-                                    Detail Penghimpunan dan Pendistribusian Tahun 2024
+                                    Detail Penghimpunan dan Pendistribusian Tahun {{ date('Y') }}
                                 </h2>
                             </div>
                         </div>
