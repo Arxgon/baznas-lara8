@@ -27,7 +27,6 @@ class CreateMonthsTable extends Migration
             $table->timestamps();
 
             $table->unique(['month_name', 'year_id']); // Membatasi bulan unik
-            $table->timestamps();
         });
     }
 
