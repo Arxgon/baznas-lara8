@@ -3,11 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Api\YearDataController;
-use App\Http\Controllers\Api\AttendanceLeaderController;
-use App\Http\Controllers\Api\RunningTextController;
-use App\Http\Controllers\Api\AdsImageController;
-use App\Http\Controllers\Api\VideoController;
+use App\Http\Controllers\YearDataController;
+use App\Http\Controllers\AttendanceLeaderController;
+use App\Http\Controllers\RunningTextController;
+use App\Http\Controllers\AdsImageController;
+use App\Http\Controllers\VideoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
