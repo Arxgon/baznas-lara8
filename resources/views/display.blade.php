@@ -317,6 +317,8 @@
 
         if(videoData !== null){
             setInterval(openModal, 1000 * (60 * videoData.break));
+        } else {
+            setInterval(openModal, 1000 * (60));
         }
 
         $(document).ready(async function () {
@@ -368,12 +370,12 @@
 
 
             // listener
-            window.Echo.channel('attendance')
-            .listen('ChangeAttendanceEvent', (event) => {
-                console.log(event);
-                console.log('Attendance data updated:', event.attendanceData);
-                populateAttendance(event.attendanceData, attendanceTableId)
-            });
+            // window.Echo.channel('attendance')
+            // .listen('ChangeAttendanceEvent', (event) => {
+            //     console.log(event);
+            //     console.log('Attendance data updated:', event.attendanceData);
+            //     populateAttendance(event.attendanceData, attendanceTableId)
+            // });
 
 
         });

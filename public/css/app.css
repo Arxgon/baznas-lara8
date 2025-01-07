@@ -799,6 +799,19 @@ video {
    .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+   @keyframes infinite-scroll {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+   .animate-infinite-scroll {
+  animation: infinite-scroll 25s linear infinite;
+}
    @keyframes spin {
 
   to {
@@ -807,6 +820,23 @@ video {
 }
    .animate-spin {
   animation: spin 1s linear infinite;
+}
+   @keyframes text-slide-2 {
+
+  0%, 40% {
+    transform: translateY(0%);
+  }
+
+  50%, 90% {
+    transform: translateY(-33.33%);
+  }
+
+  100% {
+    transform: translateY(-66.66%);
+  }
+}
+   .animate-text-slide-2 {
+  animation: text-slide-2 5s cubic-bezier(0.83, 0, 0.17, 1) infinite;
 }
    .cursor-pointer {
   cursor: pointer;
