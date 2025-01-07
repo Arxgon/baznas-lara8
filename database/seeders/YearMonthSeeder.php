@@ -17,10 +17,10 @@ class YearMonthSeeder extends Seeder
     {
         // Mendapatkan tahun saat ini
         $currentYear = Carbon::now()->year;
-        $currentMonthIndex = Carbon::now()->month - 1; // Index bulan saat ini (0-based index)
+        $currentMonthIndex = 0; // Index bulan saat ini (0-based index)
 
         // Membuat tahun (misalnya tahun saat ini)
-        $year = Year::firstOrCreate(['year' => $currentYear]);
+        $year = Year::firstOrCreate(['year' => 2024]);
 
         $previousCollection = 0; // Inisialisasi nilai koleksi bulan sebelumnya
         $previousDistribution = 0; // Inisialisasi nilai distribusi bulan sebelumnya
