@@ -8,4 +8,9 @@ use Filament\Resources\Pages\EditRecord;
 class EditAttendanceLeader extends EditRecord
 {
     public static $resource = AttendanceLeaderResource::class;
+
+    public function canDelete()
+    {
+        return false;
+    }
 }
