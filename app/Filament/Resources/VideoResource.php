@@ -17,10 +17,12 @@ class VideoResource extends Resource
 {
     public static $icon = 'heroicon-o-collection';
     public static $model = Video::class;
-
     public static $navigationIcon = 'heroicon-o-rectangle-stack';
+    public static $navigationLabel = 'Video';
 
-    public static $navigationGroup = 'Tambahan';
+    public static $label = 'Video';
+
+    public static $navigationSort = 4;
 
     public static function form(Form $form)
     {

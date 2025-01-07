@@ -5608,16 +5608,24 @@ function populateChart(_x4, _x5, _x6) {
 }
 function _populateChart() {
   _populateChart = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(elementId, collection, distribution) {
-    var currentYear, collectionOptions, distributionOptions, collectionChart, distributionChart;
+    var currentDate, year, collectionOptions, distributionOptions, collectionChart, distributionChart;
     return _regeneratorRuntime().wrap(function _callee8$(_context8) {
       while (1) switch (_context8.prev = _context8.next) {
         case 0:
-          currentYear = new Date().getFullYear(); // Menambahkan HTML ke elemen dengan ID tertentu
+          currentDate = new Date();
+          if (currentDate.getMonth() === 0) {
+            year = currentDate.getFullYear() - 1;
+          } else {
+            year = currentDate.getFullYear();
+          }
+          console.log(year);
+
+          // Menambahkan HTML ke elemen dengan ID tertentu
           document.getElementById(elementId).innerHTML = "\n    <div class=\"w-1/2 flex flex-col gap-1\">\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Penghimpunan\n                    </h2>\n                </div>\n            </div>\n            <p\n                class=\"inline-flex justify-center items-center py-1.5 px-3 rounded-md text-2xl font-bold bg-yellow-100 text-yellow-800 \">\n                <span class=\"font-medium text-lg\">Rp</span>".concat(collection.reduce(function (a, b) {
             return a + b;
-          }, 0).toLocaleString(), "\n            </p>\n        </div>\n\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <!-- Header -->\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Penghimpunan ").concat(currentYear, "\n                    </h2>\n                </div>\n\n            </div>\n            <!-- End Header -->\n\n            <div id=\"chart-collection\"></div>\n        </div>\n    </div>\n    <div class=\"w-1/2 flex flex-col gap-1\">\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Pendistribusian\n                    </h2>\n                </div>\n            </div>\n            <p\n                class=\"inline-flex justify-center items-center py-1.5 px-3 rounded-md text-2xl font-bold bg-teal-100 text-teal-800 \">\n                <span class=\"font-medium text-lg\">Rp</span>").concat(distribution.reduce(function (a, b) {
+          }, 0).toLocaleString(), "\n            </p>\n        </div>\n\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <!-- Header -->\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Penghimpunan ").concat(year, "\n                    </h2>\n                </div>\n\n            </div>\n            <!-- End Header -->\n\n            <div id=\"chart-collection\"></div>\n        </div>\n    </div>\n    <div class=\"w-1/2 flex flex-col gap-1\">\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Pendistribusian\n                    </h2>\n                </div>\n            </div>\n            <p\n                class=\"inline-flex justify-center items-center py-1.5 px-3 rounded-md text-2xl font-bold bg-teal-100 text-teal-800 \">\n                <span class=\"font-medium text-lg\">Rp</span>").concat(distribution.reduce(function (a, b) {
             return a + b;
-          }, 0).toLocaleString(), "\n            </p>\n        </div>\n\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <!-- Header -->\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Pendistribusian ").concat(currentYear, "\n                    </h2>\n                </div>\n            </div>\n            <!-- End Header -->\n\n            <div id=\"chart-distribution\"></div>\n        </div>\n    </div>\n    ");
+          }, 0).toLocaleString(), "\n            </p>\n        </div>\n\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <!-- Header -->\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Pendistribusian ").concat(year, "\n                    </h2>\n                </div>\n            </div>\n            <!-- End Header -->\n\n            <div id=\"chart-distribution\"></div>\n        </div>\n    </div>\n    ");
 
           // Membuat chart collection menggunakan ApexCharts
           collectionOptions = {
@@ -5878,7 +5886,7 @@ function _populateChart() {
           // Render chart untuk distribution
           distributionChart = new ApexCharts(document.querySelector("#chart-distribution"), distributionOptions);
           distributionChart.render();
-        case 8:
+        case 10:
         case "end":
           return _context8.stop();
       }

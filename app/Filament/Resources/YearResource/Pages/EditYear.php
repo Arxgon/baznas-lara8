@@ -8,4 +8,6 @@ use Filament\Resources\Pages\EditRecord;
 class EditYear extends EditRecord
 {
     public static $resource = YearResource::class;
+
+    public static $title = 'Tahun';
 }

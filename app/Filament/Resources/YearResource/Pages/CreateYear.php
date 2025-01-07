@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateYear extends CreateRecord
 {
     public static $resource = YearResource::class;
+
+    public static $title = 'Tahun';
 }

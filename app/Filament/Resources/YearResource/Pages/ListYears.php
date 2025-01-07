@@ -8,4 +8,6 @@ use Filament\Resources\Pages\ListRecords;
 class ListYears extends ListRecords
 {
     public static $resource = YearResource::class;
+
+    public static $title = 'Tahun';
 }

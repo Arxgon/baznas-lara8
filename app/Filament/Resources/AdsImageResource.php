@@ -13,7 +13,11 @@ class AdsImageResource extends Resource
 {
     public static $icon = 'heroicon-o-collection';
 
-    public static $navigationGroup = 'Tambahan';
+    public static $navigationLabel = 'Ads Image';
+
+    public static $label = 'Ads Image';
+
+    public static $navigationSort = 6;
 
 
     public static function form(Form $form)

@@ -8,4 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateAttendanceLeader extends CreateRecord
 {
     public static $resource = AttendanceLeaderResource::class;
+
+    public static $title = 'Absensi Pimpinan';
 }

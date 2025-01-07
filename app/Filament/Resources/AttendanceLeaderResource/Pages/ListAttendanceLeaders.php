@@ -8,6 +8,7 @@ use Filament\Resources\Pages\ListRecords;
 class ListAttendanceLeaders extends ListRecords
 {
     public static $resource = AttendanceLeaderResource::class;
+    public static $title = 'Absensi Pimpinan';
 
     public function canCreate()
     {

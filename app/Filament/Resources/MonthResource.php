@@ -17,13 +17,11 @@ class MonthResource extends Resource
 
     public static $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static $navigationGroup = 'Kas';
-
     public static $navigationLabel = 'Pengaturan Bulan';
 
     public static $label = 'Kas Per Bulan';
 
-    public static $navigationSort = 0;
+    public static $navigationSort = 3;
 
     public static function canCreate(): bool
    {

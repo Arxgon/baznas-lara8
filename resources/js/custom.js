@@ -243,7 +243,16 @@ function populateTable(data, tableId) {
 }
 
 async function populateChart(elementId, collection, distribution) {
-    const currentYear = new Date().getFullYear();
+    const currentDate = new Date();
+    let year;
+
+    if (currentDate.getMonth() === 0) {
+        year = currentDate.getFullYear() - 1;
+    } else {
+        year = currentDate.getFullYear();
+    }
+
+    console.log(year);
 
     // Menambahkan HTML ke elemen dengan ID tertentu
     document.getElementById(elementId).innerHTML = `
@@ -269,7 +278,7 @@ async function populateChart(elementId, collection, distribution) {
             <div class="flex justify-center items-center">
                 <div>
                     <h2 class="text-lg font-bold text-gray-900 ">
-                        Penghimpunan ${currentYear}
+                        Penghimpunan ${year}
                     </h2>
                 </div>
 
@@ -301,7 +310,7 @@ async function populateChart(elementId, collection, distribution) {
             <div class="flex justify-center items-center">
                 <div>
                     <h2 class="text-lg font-bold text-gray-900 ">
-                        Pendistribusian ${currentYear}
+                        Pendistribusian ${year}
                     </h2>
                 </div>
             </div>

@@ -9,6 +9,8 @@ class EditAttendanceLeader extends EditRecord
 {
     public static $resource = AttendanceLeaderResource::class;
 
+    public static $title = 'Absensi Pimpinan';
+
     public function canDelete()
     {
         return false;

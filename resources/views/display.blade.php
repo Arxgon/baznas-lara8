@@ -14,7 +14,16 @@
     <script src="{{ asset('public/js/preline/dist/preline.js') }}"></script>
     <script src="{{ asset('public/js/preline/dist/helper-apexcharts.js') }}"></script> --}}
 </head>
+<?php
+    $currentYear = date('Y');
+    $currentMonth = date('n');
 
+    if ($currentMonth == 1) {
+        $year = $currentYear - 1;
+    } else {
+        $year = $currentYear;
+    }
+?>
 <body class="overflow-hidden"
     style="background-color: #ace1af; background-image: radial-gradient(at 40% 80%, #ace1af 0%, transparent 60%), radial-gradient(at 14% 21%, #b0ebb4 0%, transparent 50%), radial-gradient(at 22% 57%, #bff6c3 0%, transparent 40%), radial-gradient(at 85% 85%, #e0fbe2 0%, transparent 30%);">
 
@@ -70,7 +79,7 @@
                                         Pimpinan BAZNAS Prov. Jawa Tengah
                                     </h2>
                                     <h2 id="date-now" class="text-base font-bold text-gray-900 dark:text-neutral-200">
-                                        Selasa, 5 November {{ date('Y') }}
+                                        Selasa, 5 November {{ $year }}
                                     </h2>
                                 </div>
                                 <!-- End Title -->
@@ -106,7 +115,7 @@
                         <div class="flex justify-center items-center p-1">
                             <div>
                                 <h2 class="text-normal font-bold text-gray-900">
-                                    Detail Penghimpunan dan Pendistribusian Tahun {{ date('Y') }}
+                                    Detail Penghimpunan dan Pendistribusian Tahun {{ $year }}
                                 </h2>
                             </div>
                         </div>
@@ -324,7 +333,15 @@
         $(document).ready(async function () {
             destroyAllCharts();
 
-            const year = (new Date()).getFullYear();
+            const currentDate = new Date();
+            let year;
+
+            if (currentDate.getMonth() === 0) {
+                year = currentDate.getFullYear();
+            } else {
+                year = currentDate.getFullYear();
+            }
+
             const tableId = 'monthlyDataTable';
             const chartElementId = 'chartContainer';
             const attendanceTableId = 'attendanceTable';

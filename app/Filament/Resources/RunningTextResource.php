@@ -16,7 +16,11 @@ class RunningTextResource extends Resource
 
     public static $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static $navigationGroup = 'Tambahan';
+    public static $navigationLabel = 'Running Text';
+
+    public static $label = 'Running Text';
+
+    public static $navigationSort = 5;
 
     public static function form(Form $form)
     {

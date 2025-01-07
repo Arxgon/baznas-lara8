@@ -16,11 +16,11 @@ class AttendanceLeaderResource extends Resource
 
     public static $icon = 'heroicon-o-collection';
 
-    public static $navigationGroup = 'Absensi';
-
     public static $navigationLabel = 'Absensi Pimpinan';
 
     public static $label = 'Absensi Pimpinan';
+
+    public static $navigationSort = 1;
 
     public static function form(Form $form)
     {

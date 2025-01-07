@@ -94,7 +94,7 @@ class YearDataController extends Controller
      * @param  int  $year
      * @return JsonResponse
      */
-    public function getMonthlyData(int $year): JsonResponse
+    public function getMonthlyDataFull(int $year): JsonResponse
     {
         try {
             // Find the year record
@@ -132,4 +132,73 @@ class YearDataController extends Controller
             return response()->json(['message' => 'An error occurred while fetching data'], 500);
         }
     }
+
+    private function getMonthsArray(): array
+    {
+        return [
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Oktober',
+            'November',
+            'Desember'
+        ];
+    }
+
+    public function getMonthlyData(int $year): JsonResponse
+    {
+        try {
+            $currentMonth = date('n');
+
+            if ($currentMonth == 1) {
+                $yearToFetch = $year - 1;
+            } else {
+                $yearToFetch = $year;
+            }
+
+            $yearRecord = Year::where('year', $yearToFetch)->first();
+
+            if (!$yearRecord) {
+                return response()->json(['message' => 'Year not found'], 404);
+            }
+
+            $monthsArray = $this->getMonthsArray();
+
+            if ($currentMonth == 1) {
+                $monthlyData = $yearRecord->months()
+                    ->orderByRaw("FIELD(month_name, '" . implode("', '", $monthsArray) . "')")
+                    ->get(['month_name', 'collection', 'distribution']);
+            } else {
+                // Ambil data bulan hingga bulan sebelum bulan saat ini
+                $monthlyData = $yearRecord->months()
+                    ->whereIn('month_name', array_slice($monthsArray, 0, $currentMonth - 1))
+                    ->orderByRaw("FIELD(month_name, '" . implode("', '", $monthsArray) . "')")
+                    ->get(['month_name', 'collection', 'distribution']);
+            }
+
+            $totalCollection = $monthlyData->sum('collection');
+            $totalDistribution = $monthlyData->sum('distribution');
+
+            $formattedData = [
+                'months' => $monthlyData->pluck('month_name')->all(),
+                'collections' => $monthlyData->pluck('collection')->all(),
+                'distributions' => $monthlyData->pluck('distribution')->all(),
+                'total_collection' => $totalCollection,
+                'total_distribution' => $totalDistribution,
+            ];
+
+            return response()->json($formattedData);
+        } catch (Exception $e) {
+            Log::error("Error fetching monthly data for year {$year}: " . $e->getMessage());
+            return response()->json(['message' => 'An error occurred while fetching data'], 500);
+        }
+    }
+
+
 }

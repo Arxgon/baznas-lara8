@@ -9,6 +9,8 @@ class EditMonth extends EditRecord
 {
     public static $resource = MonthResource::class;
 
+    public static $title = 'Pengaturan Bulan';
+
     public function canDelete()
     {
         return false;

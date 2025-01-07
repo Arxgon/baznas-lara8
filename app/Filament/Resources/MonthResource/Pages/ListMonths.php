@@ -9,6 +9,9 @@ class ListMonths extends ListRecords
 {
     public static $resource = MonthResource::class;
 
+    public static $title = 'Pengaturan Bulan';
+
+
     public function canCreate()
     {
         return false;
