@@ -774,8 +774,8 @@ video {
    .max-h-full {
   max-height: 100%;
 }
-   .min-h-80 {
-  min-height: 20rem;
+   .min-h-96 {
+  min-height: 24rem;
 }
    .min-h-screen {
   min-height: 100vh;
@@ -984,6 +984,9 @@ video {
 }
    .items-center {
   align-items: center;
+}
+   .items-stretch {
+  align-items: stretch;
 }
    .justify-center {
   justify-content: center;

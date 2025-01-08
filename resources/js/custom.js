@@ -226,13 +226,13 @@ function populateTable(data, tableId) {
                 [&:nth-child(3)]:*:odd:bg-teal-100
                 [&:nth-child(3)]:*:even:bg-teal-50
                 ">
-                <td class="px-6 py-2 whitespace-nowrap text-md font-semibold text-gray-800">
+                <td class="px-6 py-3 whitespace-nowrap text-md font-semibold text-gray-800">
                     ${month}
                 </td>
-                <td class="px-6 py-2 whitespace-nowrap text-md text-end font-bold text-yellow-900">
+                <td class="px-6 py-3 whitespace-nowrap text-md text-end font-bold text-yellow-900">
                     <span class="font-normal text-sm">Rp</span>${collection.toLocaleString()}
                 </td>
-                <td class="px-6 py-2 whitespace-nowrap text-md text-end font-bold text-teal-800">
+                <td class="px-6 py-3 whitespace-nowrap text-md text-end font-bold text-teal-800">
                     <span class="font-normal text-sm">Rp</span>${distribution.toLocaleString()}
                 </td>
             </tr>
@@ -321,11 +321,13 @@ async function populateChart(elementId, collection, distribution) {
     </div>
     `;
 
+    const chartHeight = 400;
+
     // Membuat chart collection menggunakan ApexCharts
     const collectionOptions = {
         chart: {
             type: "line",
-            height: 250,
+            height: chartHeight,
             dropShadow: {
                 enabled: true,
                 color: "#000",
@@ -467,7 +469,7 @@ async function populateChart(elementId, collection, distribution) {
     const distributionOptions = {
         chart: {
             type: "line",
-            height: 250,
+            height: chartHeight,
             dropShadow: {
                 enabled: true,
                 color: "#000",
@@ -678,6 +680,14 @@ function populateRunningText(data, elementId) {
 }
 
 async function populateAds(data, elementId) {
+
+    const element = document.getElementById(elementId);
+
+    if (!element) {
+        console.log(`Element with id "${elementId}" does not exist.`);
+        return;
+    }
+
     $(`#${elementId}`).empty();
 
     let html = ``;
@@ -705,8 +715,8 @@ async function populateAds(data, elementId) {
                 "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer",
                 "isAutoPlay": true
             }'
-        class="relative">
-            <div class="hs-carousel relative overflow-hidden w-full min-h-80 bg-white rounded-lg">
+        class="relative flex h-full items-center justify-center">
+            <div class="hs-carousel relative flex items-center justify-center overflow-hidden w-full min-h-96 bg-white rounded-lg">
                 <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
                     ${html}
                 </div>

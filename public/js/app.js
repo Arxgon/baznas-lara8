@@ -5599,7 +5599,7 @@ function populateTable(data, tableId) {
   data.months.forEach(function (month, index) {
     var collection = data.collections[index];
     var distribution = data.distributions[index];
-    var rowHtml = "\n            <tr class=\"\n                odd:bg-green-100\n                even:bg-green-50\n                [&:nth-child(2)]:*:odd:bg-yellow-100\n                [&:nth-child(2)]:*:even:bg-yellow-50\n                [&:nth-child(3)]:*:odd:bg-teal-100\n                [&:nth-child(3)]:*:even:bg-teal-50\n                \">\n                <td class=\"px-6 py-2 whitespace-nowrap text-md font-semibold text-gray-800\">\n                    ".concat(month, "\n                </td>\n                <td class=\"px-6 py-2 whitespace-nowrap text-md text-end font-bold text-yellow-900\">\n                    <span class=\"font-normal text-sm\">Rp</span>").concat(collection.toLocaleString(), "\n                </td>\n                <td class=\"px-6 py-2 whitespace-nowrap text-md text-end font-bold text-teal-800\">\n                    <span class=\"font-normal text-sm\">Rp</span>").concat(distribution.toLocaleString(), "\n                </td>\n            </tr>\n        ");
+    var rowHtml = "\n            <tr class=\"\n                odd:bg-green-100\n                even:bg-green-50\n                [&:nth-child(2)]:*:odd:bg-yellow-100\n                [&:nth-child(2)]:*:even:bg-yellow-50\n                [&:nth-child(3)]:*:odd:bg-teal-100\n                [&:nth-child(3)]:*:even:bg-teal-50\n                \">\n                <td class=\"px-6 py-3 whitespace-nowrap text-md font-semibold text-gray-800\">\n                    ".concat(month, "\n                </td>\n                <td class=\"px-6 py-3 whitespace-nowrap text-md text-end font-bold text-yellow-900\">\n                    <span class=\"font-normal text-sm\">Rp</span>").concat(collection.toLocaleString(), "\n                </td>\n                <td class=\"px-6 py-3 whitespace-nowrap text-md text-end font-bold text-teal-800\">\n                    <span class=\"font-normal text-sm\">Rp</span>").concat(distribution.toLocaleString(), "\n                </td>\n            </tr>\n        ");
     $("#".concat(tableId, " tbody")).append(rowHtml);
   });
 }
@@ -5608,7 +5608,7 @@ function populateChart(_x4, _x5, _x6) {
 }
 function _populateChart() {
   _populateChart = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(elementId, collection, distribution) {
-    var currentDate, year, collectionOptions, distributionOptions, collectionChart, distributionChart;
+    var currentDate, year, chartHeight, collectionOptions, distributionOptions, collectionChart, distributionChart;
     return _regeneratorRuntime().wrap(function _callee8$(_context8) {
       while (1) switch (_context8.prev = _context8.next) {
         case 0:
@@ -5626,12 +5626,11 @@ function _populateChart() {
           }, 0).toLocaleString(), "\n            </p>\n        </div>\n\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <!-- Header -->\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Penghimpunan ").concat(year, "\n                    </h2>\n                </div>\n\n            </div>\n            <!-- End Header -->\n\n            <div id=\"chart-collection\"></div>\n        </div>\n    </div>\n    <div class=\"w-1/2 flex flex-col gap-1\">\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Pendistribusian\n                    </h2>\n                </div>\n            </div>\n            <p\n                class=\"inline-flex justify-center items-center py-1.5 px-3 rounded-md text-2xl font-bold bg-teal-100 text-teal-800 \">\n                <span class=\"font-medium text-lg\">Rp</span>").concat(distribution.reduce(function (a, b) {
             return a + b;
           }, 0).toLocaleString(), "\n            </p>\n        </div>\n\n        <div class=\"p-3 flex flex-col bg-white border shadow-sm rounded-xl\">\n            <!-- Header -->\n            <div class=\"flex justify-center items-center\">\n                <div>\n                    <h2 class=\"text-lg font-bold text-gray-900 \">\n                        Pendistribusian ").concat(year, "\n                    </h2>\n                </div>\n            </div>\n            <!-- End Header -->\n\n            <div id=\"chart-distribution\"></div>\n        </div>\n    </div>\n    ");
-
-          // Membuat chart collection menggunakan ApexCharts
+          chartHeight = 400; // Membuat chart collection menggunakan ApexCharts
           collectionOptions = {
             chart: {
               type: "line",
-              height: 250,
+              height: chartHeight,
               dropShadow: {
                 enabled: true,
                 color: "#000",
@@ -5757,7 +5756,7 @@ function _populateChart() {
           distributionOptions = {
             chart: {
               type: "line",
-              height: 250,
+              height: chartHeight,
               dropShadow: {
                 enabled: true,
                 color: "#000",
@@ -5886,7 +5885,7 @@ function _populateChart() {
           // Render chart untuk distribution
           distributionChart = new ApexCharts(document.querySelector("#chart-distribution"), distributionOptions);
           distributionChart.render();
-        case 10:
+        case 11:
         case "end":
           return _context8.stop();
       }
@@ -5933,22 +5932,30 @@ function populateAds(_x7, _x8) {
 }
 function _populateAds() {
   _populateAds = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(data, elementId) {
-    var html, container;
+    var element, html, container;
     return _regeneratorRuntime().wrap(function _callee9$(_context9) {
       while (1) switch (_context9.prev = _context9.next) {
         case 0:
-          $("#".concat(elementId)).empty();
-          html = "";
-          if (!(data.length === 0)) {
+          element = document.getElementById(elementId);
+          if (element) {
             _context9.next = 4;
             break;
           }
+          console.log("Element with id \"".concat(elementId, "\" does not exist."));
           return _context9.abrupt("return");
         case 4:
+          $("#".concat(elementId)).empty();
+          html = "";
+          if (!(data.length === 0)) {
+            _context9.next = 8;
+            break;
+          }
+          return _context9.abrupt("return");
+        case 8:
           data.forEach(function (item, index) {
             html += "\n            <div class=\"hs-carousel-slide\">\n                <div class=\"flex justify-center h-full bg-gray-100\">\n                    <img class=\"w-full h-full object-cover\" src=\"storage/".concat(item.path, "\" alt=\"").concat(item.id, "\">\n                </div>\n            </div>\n        ");
           });
-          container = "\n        <div\n            id=\"carousel\"\n            data-hs-carousel='{\n                \"loadingClasses\": \"opacity-0\",\n                \"isAutoHeight\": true,\n                \"dotsItemClasses\": \"hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer\",\n                \"isAutoPlay\": true\n            }'\n        class=\"relative\">\n            <div class=\"hs-carousel relative overflow-hidden w-full min-h-80 bg-white rounded-lg\">\n                <div class=\"hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0\">\n                    ".concat(html, "\n                </div>\n            </div>\n\n            <button type=\"button\"\n                class=\"hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 focus:outline-none focus:bg-gray-800/10 rounded-s-lg\">\n                <span class=\"text-2xl\" aria-hidden=\"true\">\n                    <svg class=\"shrink-0 size-5\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\"\n                        viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\n                        stroke-linejoin=\"round\">\n                        <path d=\"m15 18-6-6 6-6\"></path>\n                    </svg>\n                </span>\n                <span class=\"sr-only\">Previous</span>\n            </button>\n            <button type=\"button\"\n                class=\"hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 focus:outline-none focus:bg-gray-800/10 rounded-e-lg\">\n                <span class=\"sr-only\">Next</span>\n                <span class=\"text-2xl\" aria-hidden=\"true\">\n                    <svg class=\"shrink-0 size-5\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\"\n                        viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\n                        stroke-linejoin=\"round\">\n                        <path d=\"m9 18 6-6-6-6\"></path>\n                    </svg>\n                </span>\n            </button>\n\n            <div\n                class=\"hs-carousel-info inline-flex justify-center px-4 absolute bottom-3 start-[50%] -translate-x-[50%] bg-white rounded-lg\">\n                <span class=\"hs-carousel-info-current me-1\">0</span>\n                /\n                <span class=\"hs-carousel-info-total ms-1\">0</span>\n            </div>\n        </div>\n    ");
+          container = "\n        <div\n            id=\"carousel\"\n            data-hs-carousel='{\n                \"loadingClasses\": \"opacity-0\",\n                \"isAutoHeight\": true,\n                \"dotsItemClasses\": \"hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer\",\n                \"isAutoPlay\": true\n            }'\n        class=\"relative flex h-full items-center justify-center\">\n            <div class=\"hs-carousel relative flex items-center justify-center overflow-hidden w-full min-h-96 bg-white rounded-lg\">\n                <div class=\"hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0\">\n                    ".concat(html, "\n                </div>\n            </div>\n\n            <button type=\"button\"\n                class=\"hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 focus:outline-none focus:bg-gray-800/10 rounded-s-lg\">\n                <span class=\"text-2xl\" aria-hidden=\"true\">\n                    <svg class=\"shrink-0 size-5\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\"\n                        viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\n                        stroke-linejoin=\"round\">\n                        <path d=\"m15 18-6-6 6-6\"></path>\n                    </svg>\n                </span>\n                <span class=\"sr-only\">Previous</span>\n            </button>\n            <button type=\"button\"\n                class=\"hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 focus:outline-none focus:bg-gray-800/10 rounded-e-lg\">\n                <span class=\"sr-only\">Next</span>\n                <span class=\"text-2xl\" aria-hidden=\"true\">\n                    <svg class=\"shrink-0 size-5\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\"\n                        viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\n                        stroke-linejoin=\"round\">\n                        <path d=\"m9 18 6-6-6-6\"></path>\n                    </svg>\n                </span>\n            </button>\n\n            <div\n                class=\"hs-carousel-info inline-flex justify-center px-4 absolute bottom-3 start-[50%] -translate-x-[50%] bg-white rounded-lg\">\n                <span class=\"hs-carousel-info-current me-1\">0</span>\n                /\n                <span class=\"hs-carousel-info-total ms-1\">0</span>\n            </div>\n        </div>\n    ");
           $("#".concat(elementId)).append(container);
           // $(`#${elementId}`).append(html);
 
@@ -5957,7 +5964,7 @@ function _populateAds() {
             isInfiniteLoop: true,
             isAutoHeight: true
           });
-        case 8:
+        case 12:
         case "end":
           return _context9.stop();
       }
