@@ -325,14 +325,13 @@
             document.getElementById(videoId).click();
             video.muted = true;
             video.play();
-
         }
 
-        // if(videoData !== null){
-        //     setInterval(openModal, 1000 * (60 * videoData.break));
-        // } else {
-        //     setInterval(openModal, 1000 * (60));
-        // }
+        if(videoData !== null){
+            setInterval(openModal, 1000 * (60 * videoData.break));
+        } else {
+            setInterval(openModal, 1000 * (60));
+        }
 
         $(document).ready(async function () {
             destroyAllCharts();
@@ -369,15 +368,13 @@
 
                     await populateTable(data, tableId);
                     destroyAllCharts();
-                    await populateChart(chartElementId, data.collections, data.distributions);
+                    await populateChart(chartElementId, data.accumulatedCollections, data.accumulatedDistributions);
                     await populateAttendance(attendanceData, attendanceTableId);
                     await populateRunningText(news, runningTextContainer);
                     populateDate();
                     populateTime();
 
-
                     console.log('data refreshed in: ' + getCurrentTimeShort());
-
                 } catch (error) {
                     console.error("Error fetching and displaying data:", error);
                 }
@@ -388,7 +385,6 @@
             // interval use ms, 1 minutes = 10000
             setInterval(fetchMoneyData, 1000 * 60);
             setInterval(populateTime, 1000 * 30);
-
 
             // listener
             // window.Echo.channel('attendance')

@@ -182,13 +182,28 @@ class YearDataController extends Controller
                     ->get(['month_name', 'collection', 'distribution']);
             }
 
-            $totalCollection = $monthlyData->sum('collection');
-            $totalDistribution = $monthlyData->sum('distribution');
+            // $totalCollection = $monthlyData->sum('collection');
+            // $totalDistribution = $monthlyData->sum('distribution');
+
+            $accumulatedCollections = [];
+            $accumulatedDistributions = [];
+            $totalCollection = 0;
+            $totalDistribution = 0;
+
+            foreach ($monthlyData as $month) {
+                $totalCollection += $month->collection;
+                $totalDistribution += $month->distribution;
+
+                $accumulatedCollections[] = $totalCollection;
+                $accumulatedDistributions[] = $totalDistribution;
+            }
 
             $formattedData = [
                 'months' => $monthlyData->pluck('month_name')->all(),
                 'collections' => $monthlyData->pluck('collection')->all(),
                 'distributions' => $monthlyData->pluck('distribution')->all(),
+                'accumulatedCollections' => $accumulatedCollections,
+                'accumulatedDistributions' => $accumulatedDistributions,
                 'total_collection' => $totalCollection,
                 'total_distribution' => $totalDistribution,
             ];
