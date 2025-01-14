@@ -276,6 +276,12 @@
         {{-- Button (hidden) for Video Modals --}}
         <button type="button"
             class="py-3 hidden px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+            aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-splash-screen-modal"
+            data-hs-overlay="#hs-splash-screen-modal">
+            Full screen
+        </button>
+        <button type="button"
+            class="py-3 hidden px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
             aria-haspopup="dialog" aria-expanded="false" aria-controls="hs-full-screen-modal"
             data-hs-overlay="#hs-full-screen-modal">
             Full screen
@@ -297,6 +303,23 @@
             </div>
         </div>
     </div>
+    <div id="hs-splash-screen-modal"
+        class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none"
+        role="dialog" tabindex="-1" aria-labelledby="hs-splash-screen-label">
+        <div
+            class="hs-overlay-open:mt-0 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-10 opacity-0 transition-all max-w-full max-h-full h-full">
+            <div class="flex flex-col bg-white pointer-events-auto max-w-full max-h-full h-full">
+                <div id="splash-screen" class="h-full flex flex-col items-center justify-center bg-gray-800 text-white">
+                    <h1 class="text-4xl font-bold mb-4">Selamat Datang!</h1>
+                    <p class="text-lg mb-8">Tekan tombol di bawah untuk mulai.</p>
+                    <button id="start-button"
+                        class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-lg transition duration-300">
+                        Mulai Tampilkan Layar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script type="module">
         // Todo: beberapa fungsi belum ada error handle/ missing data handler
@@ -313,6 +336,9 @@
         // modal control
         const video = document.getElementById(videoId);
         const modal = document.getElementById('hs-full-screen-modal');
+        const splash = document.getElementById('hs-splash-screen-modal');
+
+        HSOverlay.open(splash);
 
         $(`#${videoId}`).trigger('click');
 
@@ -323,7 +349,7 @@
         function openModal() {
             HSOverlay.open(modal);
             document.getElementById(videoId).click();
-            video.muted = true;
+            // video.muted = true;
             video.play();
         }
 
@@ -393,6 +419,20 @@
             //     console.log('Attendance data updated:', event.attendanceData);
             //     populateAttendance(event.attendanceData, attendanceTableId)
             // });
+
+            document.getElementById('start-button').addEventListener('click', function() {
+                HSOverlay.close(splash);
+
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                    document.documentElement.msRequestFullscreen();
+                }
+            });
 
 
         });
